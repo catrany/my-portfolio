@@ -69,6 +69,22 @@ const EXPERIENCE = [
   },
 ];
 
+// --- CROSSWORD DATA ---
+const HUNTINGTON_CROSSWORDS = [
+  { date: "Feb 27, 2026", url: "https://huntnewsnu.com/91727/crossword/mini-crossword-february-28th-2026/" },
+  { date: "Feb 20, 2026", url: "https://huntnewsnu.com/91486/crossword/mini-crossword-february-20th-2026/" },
+  { date: "Feb 13, 2026", url: "https://huntnewsnu.com/91289/crossword/mini-crossword-february-13th-2026/" },
+  { date: "Jan 30, 2026", url: "https://huntnewsnu.com/90988/crossword/mini-crossword-january-30th-2026/" },
+  { date: "Jan 23, 2026", url: "https://huntnewsnu.com/90859/crossword/mini-crossword-january-23rd-2026/" },
+];
+const HUNTINGTON_ARCHIVE_URL = "https://huntnewsnu.com/staff_name/yonatan-catran/#:~:text=Mini%20Crossword%2C%20February%2027th%2C%202026";
+
+const FAVORITE_CROSSWORDS = [
+  { title: "Crossword Title 1", url: "#" },
+  { title: "Crossword Title 2", url: "#" },
+  { title: "Crossword Title 3", url: "#" },
+];
+
 const PROFILE = {
   name: "Yonatan Catran",
   title: "Computer Science & Game Development",
@@ -562,6 +578,92 @@ const styles = `
   }
   .skills-list { display: flex; flex-wrap: wrap; gap: 6px; }
 
+  /* --- CROSSWORD PAGE --- */
+  .crossword-list { display: flex; flex-direction: column; gap: 0; }
+  .crossword-row {
+    display: flex;
+    align-items: center;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .crossword-row:first-child { border-top: 1px solid var(--border); }
+  .crossword-date {
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text);
+    min-width: 140px;
+    flex-shrink: 0;
+  }
+  .crossword-divider {
+    width: 1px;
+    height: 20px;
+    background: var(--border);
+    margin: 0 20px;
+    flex-shrink: 0;
+  }
+  .crossword-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: var(--transition);
+  }
+  .crossword-link:hover { color: var(--text); }
+  .crossword-older {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-decoration: none;
+    padding: 16px 0;
+    transition: var(--transition);
+  }
+  .crossword-older:hover { color: var(--text); }
+  .crossword-older svg { transition: transform 0.2s; }
+  .crossword-older:hover svg { transform: translateX(3px); }
+  .favorites-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+  }
+  .favorite-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 20px 24px;
+    transition: var(--transition);
+    text-decoration: none;
+    color: var(--text);
+    display: block;
+  }
+  .favorite-card:hover {
+    border-color: #D0CEC9;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+    transform: translateY(-2px);
+  }
+  .favorite-card h3 {
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 4px;
+  }
+  .favorite-card span {
+    font-size: 13px;
+    color: var(--text-secondary);
+    font-weight: 400;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+
   /* --- RESUME & CONTACT --- */
   .contact-grid {
     display: grid;
@@ -664,6 +766,9 @@ const styles = `
     .contact-grid { grid-template-columns: 1fr; gap: 40px; }
     .project-grid { grid-template-columns: 1fr; }
     .hero { padding: 48px 0 40px; }
+    .crossword-date { min-width: 100px; font-size: 13px; }
+    .crossword-divider { margin: 0 12px; }
+    .favorites-grid { grid-template-columns: 1fr; }
   }
 `;
 
@@ -691,6 +796,11 @@ const ChevronRight = () => (
 const DownloadIcon = () => (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" />
+  </svg>
+);
+const ExternalLink = () => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3" />
   </svg>
 );
 
@@ -906,9 +1016,46 @@ function ProjectDetailPage({ projectId, onNavigate }) {
 
 function CrosswordsPage() {
   return (
-    <div className="page" key="art">
-      <h1>My Crosswords</h1>
-      <p>I LOOOVE making crosswords, here are some of my favorites, and the ones I have made for The Huntington News:</p>
+    <div className="page" key="crosswords">
+      <div className="hero" style={{ padding: "48px 0 40px" }}>
+        <div className="hero-label fade-in stagger-1">Puzzles</div>
+        <h1 className="fade-in stagger-2" style={{ fontSize: "clamp(32px, 5vw, 48px)" }}>My Crosswords</h1>
+        <p className="fade-in stagger-3">
+          I love making crosswords. Here are some of my favorites, and the ones I've made for The Huntington News.
+        </p>
+      </div>
+
+      {/* --- Huntington News Minis --- */}
+      <div className="section-header fade-in stagger-4">
+        <span className="section-title">Huntington News Minis</span>
+      </div>
+      <div className="crossword-list fade-in stagger-5">
+        {HUNTINGTON_CROSSWORDS.map((cw, i) => (
+          <div key={i} className="crossword-row">
+            <span className="crossword-date">{cw.date}</span>
+            <div className="crossword-divider" />
+            <a href={cw.url} className="crossword-link" target="_blank" rel="noopener noreferrer">
+              Play this puzzle <ExternalLink />
+            </a>
+          </div>
+        ))}
+      </div>
+      <a href={HUNTINGTON_ARCHIVE_URL} className="crossword-older fade-in stagger-6" target="_blank" rel="noopener noreferrer">
+        Older… <ArrowRight />
+      </a>
+
+      {/* --- Favorites from Crosshare --- */}
+      <div className="section-header fade-in stagger-7" style={{ marginTop: 64 }}>
+        <span className="section-title">My Favorites (from Crosshare)</span>
+      </div>
+      <div className="favorites-grid fade-in stagger-8">
+        {FAVORITE_CROSSWORDS.map((cw, i) => (
+          <a key={i} href={cw.url} className="favorite-card" target="_blank" rel="noopener noreferrer">
+            <h3>{cw.title}</h3>
+            <span>Play on Crosshare <ExternalLink /></span>
+          </a>
+        ))}
+      </div>
     </div>
   );
 }
@@ -964,7 +1111,6 @@ function ResumeContactPage() {
 
           <div className="fade-in stagger-3" style={{ marginBottom: 32 }}>
             <div className="about-sidebar-title" style={{ marginBottom: 14 }}>Download Resume</div>
-            {/* Replace "#" with the path to your resume PDF */}
             <a href="#" className="resume-btn" target="_blank" rel="noopener noreferrer">
               <DownloadIcon /> Resume (PDF)
             </a>
@@ -1031,9 +1177,9 @@ export default function App() {
   const NAV_ITEMS = [
     ["home", "Home"],
     ["projects", "Projects & Experience"],
+    ["crosswords", "My Crosswords"],
     ["about", "About Me"],
     ["contact", "Resume & Contact"],
-    ["crosswords", "My Crosswords"]
   ];
 
   return (
