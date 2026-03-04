@@ -127,7 +127,7 @@ const styles = `
     --font-display: 'Syne', sans-serif;
     --font-body: 'DM Sans', sans-serif;
     --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-    --max-width: 1120px;
+    --max-width: 100%;
   }
 
   html { scroll-behavior: smooth; }
