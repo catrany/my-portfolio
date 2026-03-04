@@ -904,6 +904,15 @@ function ProjectDetailPage({ projectId, onNavigate }) {
   );
 }
 
+function CrosswordsPage() {
+  return (
+    <div className="page" key="art">
+      <h1>My Crosswords</h1>
+      <p>I LOOOVE making crosswords, here are some of my favorites, and the ones I have made for The Huntington News:</p>
+    </div>
+  );
+}
+
 function AboutPage() {
   return (
     <div className="page" key="about">
@@ -1024,6 +1033,7 @@ export default function App() {
     ["projects", "Projects & Experience"],
     ["about", "About Me"],
     ["contact", "Resume & Contact"],
+    ["crosswords", "My Crosswords"]
   ];
 
   return (
@@ -1051,6 +1061,7 @@ export default function App() {
       {page === "project" && <ProjectDetailPage projectId={projectId} onNavigate={navigate} />}
       {page === "about" && <AboutPage />}
       {page === "contact" && <ResumeContactPage />}
+      {page === "crosswords" && <CrosswordsPage />}
 
       <footer className="footer">
         &copy; {new Date().getFullYear()} {PROFILE.name}. All rights reserved.
