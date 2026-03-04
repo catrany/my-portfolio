@@ -191,7 +191,7 @@ const styles = `
   .page {
     max-width: var(--max-width);
     margin: 0 auto;
-    padding: 48px 32px 96px;
+    padding: 48px 64px 96px;
     min-height: calc(100vh - 64px);
   }
 
