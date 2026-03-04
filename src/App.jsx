@@ -77,7 +77,7 @@ const HUNTINGTON_CROSSWORDS = [
   { date: "Jan 30, 2026", url: "https://huntnewsnu.com/90988/crossword/mini-crossword-january-30th-2026/" },
   { date: "Jan 23, 2026", url: "https://huntnewsnu.com/90859/crossword/mini-crossword-january-23rd-2026/" },
 ];
-const HUNTINGTON_ARCHIVE_URL = "https://huntnewsnu.com/staff_name/yonatan-catran/#:~:text=Mini%20Crossword%2C%20February%2027th%2C%202026";
+const HUNTINGTON_ARCHIVE_URL = "https://huntnewsnu.com/staff_name/yonatan-catran/";
 
 const FAVORITE_CROSSWORDS = [
   { title: "Crossword Title 1", url: "#" },
