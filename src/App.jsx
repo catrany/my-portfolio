@@ -80,9 +80,9 @@ const HUNTINGTON_CROSSWORDS = [
 const HUNTINGTON_ARCHIVE_URL = "https://huntnewsnu.com/staff_name/yonatan-catran/";
 
 const FAVORITE_CROSSWORDS = [
-  { title: "Crossword Title 1", url: "#" },
-  { title: "Crossword Title 2", url: "#" },
-  { title: "Crossword Title 3", url: "#" },
+  { title: "🤔 😕 🙂", url: "https://crosshare.org/crosswords/oJryJd7VOZ6ANfU92yCK" },
+  { title: "2nd Cryptic ✌️", url: "https://crosshare.org/crosswords/oNsGnoBl7AGllf1ptlLf/2nd-cryptic" },
+  { title: "A Little Off-Putting 😬", url: "https://crosshare.org/crosswords/fqPxwVPAfJ6bXDerg7Z4/a-little-off-putting" },
 ];
 
 const PROFILE = {
