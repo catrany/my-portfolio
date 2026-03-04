@@ -1059,9 +1059,9 @@ export default function App() {
       {page === "home" && <HomePage onNavigate={navigate} />}
       {page === "projects" && <ProjectsPage onNavigate={navigate} />}
       {page === "project" && <ProjectDetailPage projectId={projectId} onNavigate={navigate} />}
+      {page === "crosswords" && <CrosswordsPage />}
       {page === "about" && <AboutPage />}
       {page === "contact" && <ResumeContactPage />}
-      {page === "crosswords" && <CrosswordsPage />}
 
       <footer className="footer">
         &copy; {new Date().getFullYear()} {PROFILE.name}. All rights reserved.
