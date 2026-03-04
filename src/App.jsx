@@ -1,81 +1,92 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 
 const FONTS_URL = "https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=Syne:wght@400;500;600;700;800&display=swap";
 
-// --- SAMPLE DATA (replace with your own) ---
+// --- YOUR DATA (swap in your own images!) ---
 const PROJECTS = [
   {
-    id: "eclipse-protocol",
-    title: "Eclipse Protocol",
-    role: "Game Designer & Developer",
-    engine: "Unreal Engine 5",
+    id: "what-remains-of-me",
+    title: "What Remains of Me",
+    role: "Project Manager, Character Artist & Animator",
+    tools: "Unity, Aseprite, Photoshop",
     year: "2025",
-    tags: ["Action RPG", "3D", "Multiplayer"],
-    summary: "A cooperative action RPG set in a fractured solar system. Designed core combat loop, progression systems, and boss encounter mechanics.",
-    description: "Eclipse Protocol is a 4-player cooperative action RPG where players navigate procedurally connected space stations in a dying solar system. I was responsible for the core combat feel, enemy AI behavior trees, the loot/progression economy, and all boss encounter designs.\n\nThe combat system uses a stamina-based melee foundation with modular ranged attachments, giving players freedom to build hybrid loadouts. Boss encounters were designed around phase-based mechanics that require team coordination.",
+    tags: ["Narrative", "2D", "Team Project"],
+    summary: "Collaborative student game at Northeastern. Led the team as project manager while designing and animating characters to guide player progression.",
+    description: "What Remains of Me is a collaborative multi-semester game project developed by a student team at Northeastern University. I served as project manager, coordinating level design and asset implementation across the team.\n\nOn the art side, I designed and animated characters in Aseprite and Photoshop, creating narrative-driven art assets that were implemented into Unity to guide player progression through the story.",
     images: [
-      { src: "https://images.unsplash.com/photo-1614732414444-096e5f1122d5?w=800&h=450&fit=crop", alt: "Eclipse Protocol - Space Station Hub" },
-      { src: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&h=450&fit=crop", alt: "Eclipse Protocol - Combat System" },
-      { src: "https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?w=800&h=450&fit=crop", alt: "Eclipse Protocol - Boss Encounter" },
+      { src: "https://images.unsplash.com/photo-1614732414444-096e5f1122d5?w=800&h=450&fit=crop", alt: "What Remains of Me - Screenshot 1" },
+      { src: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&h=450&fit=crop", alt: "What Remains of Me - Screenshot 2" },
     ],
   },
   {
-    id: "paper-towns",
-    title: "Paper Towns",
-    role: "Solo Developer",
-    engine: "Unity",
-    year: "2024",
-    tags: ["Puzzle", "2D", "Narrative"],
-    summary: "A hand-drawn puzzle game about rebuilding a town from origami memories. Designed all puzzles, narrative structure, and paper-fold mechanic.",
-    description: "Paper Towns is a contemplative puzzle game where players unfold paper dioramas to reconstruct a grandmother's memories of her hometown. Each level is a single sheet that folds and unfolds to reveal hidden paths, characters, and story fragments.\n\nI handled all aspects of development: puzzle design, narrative scripting, the core fold/unfold mechanic, and art direction. The fold system uses a custom shader that simulates paper creasing and shadow casting in real-time.",
+    id: "pigeon-coo-lette",
+    title: "Pigeon Coo-lette",
+    role: "Sound Designer",
+    tools: "Audacity, Unity",
+    year: "2025",
+    tags: ["Steam Release", "Audio", "Team Project"],
+    summary: "Sole sound designer for a Steam-released student game. Created the full soundscape including character interactions, ambience, UI feedback, and gameplay mechanics.",
+    description: "Pigeon Coo-lette is a collaborative student-developed game released on Steam. As the sole sound designer, I was responsible for the complete audio experience.\n\nI designed and implemented the full soundscape using Audacity and curated sound assets — covering character interactions, environmental ambience, UI feedback sounds, and gameplay mechanic audio. The goal was to create a cohesive audio identity that supported the game's tone and feel.",
     images: [
-      { src: "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=800&h=450&fit=crop", alt: "Paper Towns - Village Scene" },
-      { src: "https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=800&h=450&fit=crop", alt: "Paper Towns - Fold Mechanic" },
-      { src: "https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=800&h=450&fit=crop", alt: "Paper Towns - Story Moment" },
+      { src: "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=800&h=450&fit=crop", alt: "Pigeon Coo-lette - Screenshot 1" },
+      { src: "https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=800&h=450&fit=crop", alt: "Pigeon Coo-lette - Screenshot 2" },
     ],
   },
   {
-    id: "signal-lost",
-    title: "Signal Lost",
-    role: "Level Designer",
-    engine: "Godot",
-    year: "2024",
-    tags: ["Horror", "2D", "Game Jam"],
-    summary: "48-hour game jam entry. A lo-fi horror game about intercepting corrupted radio signals. Designed all levels and audio-reactive mechanics.",
-    description: "Signal Lost was built in 48 hours for Ludum Dare 54. Players tune a radio dial to intercept distorted transmissions, each revealing a fragment of a missing person's last broadcast. The game world distorts based on the frequency you're tuned to.\n\nI designed the level progression, the radio-tuning mechanic, and the audio-reactive environment system where static and signal clarity affect visibility and enemy behavior. The game placed in the top 5% for atmosphere.",
-    images: [
-      { src: "https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=800&h=450&fit=crop", alt: "Signal Lost - Radio Interface" },
-      { src: "https://images.unsplash.com/photo-1557672172-298e090bd0f1?w=800&h=450&fit=crop", alt: "Signal Lost - Distorted World" },
-    ],
-  },
-  {
-    id: "gridlock",
-    title: "Gridlock",
-    role: "Systems Designer",
-    engine: "Unity",
+    id: "cougar-guesser",
+    title: "CougarGuesser",
+    role: "Art & UI Designer",
+    tools: "HTML, CSS, JavaScript",
     year: "2023",
-    tags: ["Strategy", "Multiplayer", "Prototype"],
-    summary: "A real-time tactics prototype exploring asymmetric multiplayer on a shared grid. Designed faction abilities, map layouts, and balance framework.",
-    description: "Gridlock is a 1v1 real-time tactics game where two players share a hex grid but see different information based on their faction. One faction operates through direct vision, the other through sonar-like pulses.\n\nI designed the asymmetric information systems, faction ability kits, map layouts that support both playstyles, and built the initial balance spreadsheet framework. The prototype was used to validate the core asymmetry concept before a planned full production.",
+    tags: ["Browser Game", "UI/UX", "Team Project"],
+    summary: "Art and UI designer for a GeoGuessr-inspired browser game. Designed a custom architectural map and the full visual interface.",
+    description: "CougarGuesser is a browser-based location guessing game inspired by GeoGuessr, developed collaboratively using HTML, CSS, and JavaScript.\n\nI designed a custom architectural map using a line-art style based on floor plans and aerial imagery, created the start menu interface, and built out the visual layout for the interactive gameplay experience.",
     images: [
-      { src: "https://images.unsplash.com/photo-1553481187-be93c21490a9?w=800&h=450&fit=crop", alt: "Gridlock - Hex Grid Overview" },
-      { src: "https://images.unsplash.com/photo-1611996575749-79a3a250f948?w=800&h=450&fit=crop", alt: "Gridlock - Faction View" },
-      { src: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&h=450&fit=crop", alt: "Gridlock - Multiplayer Match" },
+      { src: "https://images.unsplash.com/photo-1553481187-be93c21490a9?w=800&h=450&fit=crop", alt: "CougarGuesser - Screenshot 1" },
+      { src: "https://images.unsplash.com/photo-1611996575749-79a3a250f948?w=800&h=450&fit=crop", alt: "CougarGuesser - Screenshot 2" },
     ],
   },
 ];
 
+const EXPERIENCE = [
+  {
+    title: "Games Staff",
+    org: "The Huntington News",
+    period: "2026 – Present",
+    description: "Construct and develop crossword puzzles for Northeastern's official student newspaper. Launched and manage a new weekend crossword format.",
+  },
+  {
+    title: "Intern",
+    org: "MichaStocks — MASYZ Media Group",
+    period: "2023 – Present",
+    description: "Provide technical support for YouTube channel, moderate Discord server (10k+ users), manage subscriptions, and support course website design and launch.",
+  },
+  {
+    title: "STEM Instructor",
+    org: "Little Ivy Academy",
+    period: "Summer 2024 & 2025",
+    description: "Lead instructor for students aged 8–13, teaching game development, robotics programming, and digital design. Adapted curriculum for diverse skill levels.",
+  },
+];
+
 const PROFILE = {
-  name: "Your Name",
-  title: "Game Designer & Developer",
-  bio: "I design systems that feel good to play. My work focuses on combat feel, puzzle mechanics, and player-driven narratives. I care deeply about the space between intention and interaction — the moments where a player's choice becomes meaningful.\n\nCurrently seeking opportunities in game design, level design, or systems design roles.",
-  skills: ["Game Design", "Level Design", "Systems Design", "Prototyping", "Unity", "Unreal Engine", "Godot", "C#", "Blueprints", "GDScript"],
-  email: "your.email@example.com",
+  name: "Yonatan Catran",
+  title: "Computer Science & Game Development",
+  school: "Northeastern University",
+  bio: "I'm a Computer Science and Game Development student at Northeastern University with a passion for building interactive experiences. My work spans game design, character art and animation, sound design, and UI/UX — I love being involved in every layer of what makes a game feel right.\n\nI'm driven by the details: the weight of a character's movement, the timing of a sound effect, the flow of a menu. I believe great games are built at the intersection of technical skill and creative intent.",
+  skills: {
+    languages: ["Java", "C++", "Python", "Swift", "JavaScript", "HTML/CSS"],
+    programs: ["Unity", "Git", "VS Code", "IntelliJ", "Trello", "Jira"],
+    art: ["Photoshop", "Aseprite", "Illustrator", "InDesign", "Figma", "Animate"],
+  },
+  email: "Yonatan.catran@gmail.com",
+  phone: "(201) 755-5271",
+  location: "Boston, MA",
+  availability: "July – December 2026",
   links: [
-    { label: "itch.io", url: "#" },
+    { label: "LinkedIn", url: "https://linkedin.com/in/yonatan-catran" },
     { label: "GitHub", url: "#" },
-    { label: "LinkedIn", url: "#" },
-    { label: "Twitter / X", url: "#" },
+    { label: "itch.io", url: "#" },
   ],
 };
 
@@ -139,7 +150,7 @@ const styles = `
     cursor: pointer;
     color: var(--text);
   }
-  .nav-links { display: flex; gap: 8px; }
+  .nav-links { display: flex; gap: 6px; }
   .nav-link {
     background: none;
     border: none;
@@ -183,11 +194,11 @@ const styles = `
   .stagger-4 { animation-delay: 0.2s; }
   .stagger-5 { animation-delay: 0.25s; }
   .stagger-6 { animation-delay: 0.3s; }
+  .stagger-7 { animation-delay: 0.35s; }
+  .stagger-8 { animation-delay: 0.4s; }
 
   /* --- HOME --- */
-  .hero {
-    padding: 80px 0 64px;
-  }
+  .hero { padding: 80px 0 64px; }
   .hero-label {
     font-family: var(--font-body);
     font-size: 13px;
@@ -235,7 +246,7 @@ const styles = `
   .hero-cta svg { transition: transform 0.2s; }
   .hero-cta:hover svg { transform: translateX(3px); }
 
-  /* --- PROJECT GRID --- */
+  /* --- SECTION --- */
   .section-header {
     display: flex;
     align-items: baseline;
@@ -250,6 +261,8 @@ const styles = `
     text-transform: uppercase;
     color: var(--text-secondary);
   }
+
+  /* --- PROJECT GRID --- */
   .project-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -404,7 +417,6 @@ const styles = `
     opacity: 1;
     border-color: var(--accent);
   }
-
   .detail-description {
     max-width: 640px;
     font-size: 15px;
@@ -471,6 +483,51 @@ const styles = `
   .lightbox-prev { left: 20px; }
   .lightbox-next { right: 20px; }
 
+  /* --- EXPERIENCE CARDS --- */
+  .exp-list { display: flex; flex-direction: column; gap: 16px; }
+  .exp-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 24px 28px;
+    transition: var(--transition);
+  }
+  .exp-card:hover {
+    border-color: #D0CEC9;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+  }
+  .exp-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 4px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .exp-card h3 {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  .exp-card-period {
+    font-size: 13px;
+    color: var(--text-secondary);
+    font-weight: 400;
+  }
+  .exp-card-org {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-bottom: 10px;
+    font-weight: 400;
+  }
+  .exp-card p {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    font-weight: 300;
+  }
+
   /* --- ABOUT --- */
   .about-grid {
     display: grid;
@@ -493,7 +550,7 @@ const styles = `
     white-space: pre-line;
     font-weight: 300;
   }
-  .about-sidebar-section { margin-bottom: 36px; }
+  .about-sidebar-section { margin-bottom: 32px; }
   .about-sidebar-title {
     font-family: var(--font-display);
     font-size: 13px;
@@ -501,12 +558,17 @@ const styles = `
     letter-spacing: 0.06em;
     text-transform: uppercase;
     color: var(--text-secondary);
-    margin-bottom: 14px;
+    margin-bottom: 12px;
   }
   .skills-list { display: flex; flex-wrap: wrap; gap: 6px; }
 
-  /* --- CONTACT --- */
-  .contact-section { max-width: 520px; }
+  /* --- RESUME & CONTACT --- */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: start;
+  }
   .contact-section h1 {
     font-family: var(--font-display);
     font-size: clamp(32px, 5vw, 48px);
@@ -535,7 +597,6 @@ const styles = `
     border: 1px solid var(--border);
     border-radius: 99px;
     transition: var(--transition);
-    margin-bottom: 32px;
   }
   .contact-email:hover {
     border-color: var(--accent);
@@ -553,6 +614,35 @@ const styles = `
     transition: var(--transition);
   }
   .contact-link:hover { color: var(--text); background: #E8E6E3; }
+  .contact-detail {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+    font-weight: 300;
+  }
+  .contact-detail strong {
+    font-weight: 500;
+    color: var(--text);
+    margin-right: 8px;
+  }
+  .resume-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--surface);
+    background: var(--accent);
+    border: none;
+    padding: 12px 28px;
+    border-radius: 99px;
+    cursor: pointer;
+    transition: var(--transition);
+    text-decoration: none;
+    margin-top: 8px;
+  }
+  .resume-btn:hover { background: var(--accent-hover); transform: translateY(-1px); }
 
   /* --- FOOTER --- */
   .footer {
@@ -566,11 +656,13 @@ const styles = `
 
   /* --- RESPONSIVE --- */
   @media (max-width: 768px) {
-    .nav-inner { padding: 0 20px; }
+    .nav-inner { padding: 0 16px; }
+    .nav-links { gap: 2px; }
+    .nav-link { padding: 8px 10px; font-size: 12px; }
     .page { padding: 32px 20px 64px; }
     .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    .contact-grid { grid-template-columns: 1fr; gap: 40px; }
     .project-grid { grid-template-columns: 1fr; }
-    .nav-link { padding: 8px 12px; font-size: 13px; }
     .hero { padding: 48px 0 40px; }
   }
 `;
@@ -594,6 +686,11 @@ const ChevronLeft = () => (
 const ChevronRight = () => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <path d="M9 18l6-6-6-6" />
+  </svg>
+);
+const DownloadIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" />
   </svg>
 );
 
@@ -673,15 +770,15 @@ function ImageGallery({ images }) {
 // --- PAGES ---
 function HomePage({ onNavigate }) {
   return (
-    <div className="page fade-in" key="home">
+    <div className="page" key="home">
       <div className="hero">
-        <div className="hero-label fade-in stagger-1">Game Designer & Developer</div>
+        <div className="hero-label fade-in stagger-1">{PROFILE.title}</div>
         <h1 className="fade-in stagger-2">{PROFILE.name}</h1>
         <p className="fade-in stagger-3">
-          I design systems, mechanics, and experiences for games. Explore my projects below.
+          Building interactive experiences at the intersection of code, design, and play. CS & Game Development at Northeastern University.
         </p>
         <button className="hero-cta fade-in stagger-4" onClick={() => onNavigate("projects")}>
-          View Projects <ArrowRight />
+          View My Work <ArrowRight />
         </button>
       </div>
 
@@ -689,10 +786,10 @@ function HomePage({ onNavigate }) {
         <span className="section-title">Featured Projects</span>
       </div>
       <div className="project-grid">
-        {PROJECTS.slice(0, 3).map((p, i) => (
+        {PROJECTS.map((p, i) => (
           <div
             key={p.id}
-            className={`project-card fade-in stagger-${i + 3}`}
+            className={`project-card fade-in stagger-${Math.min(i + 5, 8)}`}
             onClick={() => onNavigate("project", p.id)}
           >
             <img src={p.images[0].src} alt={p.images[0].alt} className="project-card-img" />
@@ -700,7 +797,7 @@ function HomePage({ onNavigate }) {
               <div className="project-card-meta">
                 <span className="project-card-year">{p.year}</span>
                 <span className="project-card-dot" />
-                <span className="project-card-engine">{p.engine}</span>
+                <span className="project-card-engine">{p.tools}</span>
               </div>
               <h3>{p.title}</h3>
               <div className="project-card-role">{p.role}</div>
@@ -717,17 +814,21 @@ function HomePage({ onNavigate }) {
 
 function ProjectsPage({ onNavigate }) {
   return (
-    <div className="page fade-in" key="projects">
+    <div className="page" key="projects">
       <div className="hero" style={{ padding: "48px 0 40px" }}>
         <div className="hero-label fade-in stagger-1">Portfolio</div>
-        <h1 className="fade-in stagger-2" style={{ fontSize: "clamp(32px, 5vw, 48px)" }}>All Projects</h1>
-        <p className="fade-in stagger-3">A collection of games, prototypes, and jam entries I've worked on.</p>
+        <h1 className="fade-in stagger-2" style={{ fontSize: "clamp(32px, 5vw, 48px)" }}>Projects & Experience</h1>
+        <p className="fade-in stagger-3">Games, prototypes, and professional work.</p>
       </div>
-      <div className="project-grid">
+
+      <div className="section-header fade-in stagger-4">
+        <span className="section-title">Projects</span>
+      </div>
+      <div className="project-grid" style={{ marginBottom: 64 }}>
         {PROJECTS.map((p, i) => (
           <div
             key={p.id}
-            className={`project-card fade-in stagger-${Math.min(i + 2, 6)}`}
+            className={`project-card fade-in stagger-${Math.min(i + 4, 8)}`}
             onClick={() => onNavigate("project", p.id)}
           >
             <img src={p.images[0].src} alt={p.images[0].alt} className="project-card-img" />
@@ -735,7 +836,7 @@ function ProjectsPage({ onNavigate }) {
               <div className="project-card-meta">
                 <span className="project-card-year">{p.year}</span>
                 <span className="project-card-dot" />
-                <span className="project-card-engine">{p.engine}</span>
+                <span className="project-card-engine">{p.tools}</span>
               </div>
               <h3>{p.title}</h3>
               <div className="project-card-role">{p.role}</div>
@@ -743,6 +844,22 @@ function ProjectsPage({ onNavigate }) {
                 {p.tags.map((t) => <span key={t} className="tag">{t}</span>)}
               </div>
             </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="section-header fade-in stagger-5">
+        <span className="section-title">Experience</span>
+      </div>
+      <div className="exp-list">
+        {EXPERIENCE.map((exp, i) => (
+          <div key={i} className={`exp-card fade-in stagger-${Math.min(i + 5, 8)}`}>
+            <div className="exp-card-top">
+              <h3>{exp.title}</h3>
+              <span className="exp-card-period">{exp.period}</span>
+            </div>
+            <div className="exp-card-org">{exp.org}</div>
+            <p>{exp.description}</p>
           </div>
         ))}
       </div>
@@ -755,16 +872,16 @@ function ProjectDetailPage({ projectId, onNavigate }) {
   if (!project) return <div className="page"><p>Project not found.</p></div>;
 
   return (
-    <div className="page fade-in" key={`project-${projectId}`}>
-      <button className="back-btn" onClick={() => onNavigate("projects")}>
-        <ArrowLeft /> Back to Projects
+    <div className="page" key={`project-${projectId}`}>
+      <button className="back-btn fade-in" onClick={() => onNavigate("projects")}>
+        <ArrowLeft /> Back to Projects & Experience
       </button>
       <div className="detail-header fade-in stagger-1">
         <h1>{project.title}</h1>
         <div className="detail-meta">
           <span>{project.role}</span>
           <span style={{ opacity: 0.3 }}>|</span>
-          <span>{project.engine}</span>
+          <span>{project.tools}</span>
           <span style={{ opacity: 0.3 }}>|</span>
           <span>{project.year}</span>
         </div>
@@ -789,21 +906,70 @@ function ProjectDetailPage({ projectId, onNavigate }) {
 
 function AboutPage() {
   return (
-    <div className="page fade-in" key="about">
+    <div className="page" key="about">
       <div className="about-grid">
-        <div className="about-bio fade-in stagger-1">
-          <h1>About Me</h1>
-          <p>{PROFILE.bio}</p>
+        <div className="about-bio">
+          <h1 className="fade-in stagger-1">About Me</h1>
+          <p className="fade-in stagger-2">{PROFILE.bio}</p>
         </div>
-        <div className="fade-in stagger-3">
-          <div className="about-sidebar-section">
-            <div className="about-sidebar-title">Skills & Tools</div>
+        <div>
+          <div className="about-sidebar-section fade-in stagger-3">
+            <div className="about-sidebar-title">Languages</div>
             <div className="skills-list">
-              {PROFILE.skills.map((s) => <span key={s} className="tag">{s}</span>)}
+              {PROFILE.skills.languages.map((s) => <span key={s} className="tag">{s}</span>)}
             </div>
           </div>
-          <div className="about-sidebar-section">
-            <div className="about-sidebar-title">Links</div>
+          <div className="about-sidebar-section fade-in stagger-4">
+            <div className="about-sidebar-title">Programs & Engines</div>
+            <div className="skills-list">
+              {PROFILE.skills.programs.map((s) => <span key={s} className="tag">{s}</span>)}
+            </div>
+          </div>
+          <div className="about-sidebar-section fade-in stagger-5">
+            <div className="about-sidebar-title">Art & Design</div>
+            <div className="skills-list">
+              {PROFILE.skills.art.map((s) => <span key={s} className="tag">{s}</span>)}
+            </div>
+          </div>
+          <div className="about-sidebar-section fade-in stagger-6">
+            <div className="about-sidebar-title">Education</div>
+            <div className="contact-detail"><strong>Northeastern University</strong></div>
+            <div className="contact-detail">CS & Game Development — GPA: 3.789</div>
+            <div className="contact-detail" style={{ marginTop: 4 }}>2025 Dean's List</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ResumeContactPage() {
+  return (
+    <div className="page" key="contact">
+      <div className="contact-grid">
+        <div className="contact-section">
+          <h1 className="fade-in stagger-1">Resume & Contact</h1>
+          <p className="fade-in stagger-2">
+            I'm available {PROFILE.availability} and open to game design, level design, systems design, and development roles. Let's talk.
+          </p>
+
+          <div className="fade-in stagger-3" style={{ marginBottom: 32 }}>
+            <div className="about-sidebar-title" style={{ marginBottom: 14 }}>Download Resume</div>
+            {/* Replace "#" with the path to your resume PDF */}
+            <a href="#" className="resume-btn" target="_blank" rel="noopener noreferrer">
+              <DownloadIcon /> Resume (PDF)
+            </a>
+          </div>
+
+          <div className="fade-in stagger-4" style={{ marginBottom: 32 }}>
+            <div className="about-sidebar-title" style={{ marginBottom: 14 }}>Email</div>
+            <a href={`mailto:${PROFILE.email}`} className="contact-email">
+              {PROFILE.email}
+            </a>
+          </div>
+
+          <div className="fade-in stagger-5">
+            <div className="about-sidebar-title" style={{ marginBottom: 14 }}>Links</div>
             <div className="contact-links">
               {PROFILE.links.map((l) => (
                 <a key={l.label} href={l.url} className="contact-link" target="_blank" rel="noopener noreferrer">
@@ -813,32 +979,21 @@ function AboutPage() {
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  );
-}
 
-function ContactPage() {
-  return (
-    <div className="page fade-in" key="contact">
-      <div className="contact-section">
-        <h1 className="fade-in stagger-1">Get in Touch</h1>
-        <p className="fade-in stagger-2">
-          I'm currently open to game design, level design, and systems design roles. Feel free to reach out — I'd love to chat about games.
-        </p>
-        <div className="fade-in stagger-3">
-          <a href={`mailto:${PROFILE.email}`} className="contact-email">
-            {PROFILE.email}
-          </a>
-        </div>
-        <div className="fade-in stagger-4" style={{ marginTop: 24 }}>
-          <div className="about-sidebar-title" style={{ marginBottom: 14 }}>Elsewhere</div>
-          <div className="contact-links">
-            {PROFILE.links.map((l) => (
-              <a key={l.label} href={l.url} className="contact-link" target="_blank" rel="noopener noreferrer">
-                {l.label}
-              </a>
-            ))}
+        <div className="fade-in stagger-6">
+          <div className="about-sidebar-section">
+            <div className="about-sidebar-title">Details</div>
+            <div className="contact-detail"><strong>Location</strong> {PROFILE.location}</div>
+            <div className="contact-detail"><strong>Availability</strong> {PROFILE.availability}</div>
+            <div className="contact-detail"><strong>Phone</strong> {PROFILE.phone}</div>
+          </div>
+          <div className="about-sidebar-section">
+            <div className="about-sidebar-title">Open To</div>
+            <div className="skills-list">
+              {["Game Design", "Level Design", "Systems Design", "Sound Design", "UI/UX", "Development"].map((s) => (
+                <span key={s} className="tag">{s}</span>
+              ))}
+            </div>
           </div>
         </div>
       </div>
@@ -864,6 +1019,13 @@ export default function App() {
 
   const activePage = page === "project" ? "projects" : page;
 
+  const NAV_ITEMS = [
+    ["home", "Home"],
+    ["projects", "Projects & Experience"],
+    ["about", "About Me"],
+    ["contact", "Resume & Contact"],
+  ];
+
   return (
     <>
       <style>{styles}</style>
@@ -871,12 +1033,7 @@ export default function App() {
         <div className="nav-inner">
           <span className="nav-logo" onClick={() => navigate("home")}>{PROFILE.name}</span>
           <div className="nav-links">
-            {[
-              ["home", "Home"],
-              ["projects", "Projects"],
-              ["about", "About"],
-              ["contact", "Contact"],
-            ].map(([key, label]) => (
+            {NAV_ITEMS.map(([key, label]) => (
               <button
                 key={key}
                 className={`nav-link ${activePage === key ? "active" : ""}`}
@@ -893,7 +1050,7 @@ export default function App() {
       {page === "projects" && <ProjectsPage onNavigate={navigate} />}
       {page === "project" && <ProjectDetailPage projectId={projectId} onNavigate={navigate} />}
       {page === "about" && <AboutPage />}
-      {page === "contact" && <ContactPage />}
+      {page === "contact" && <ResumeContactPage />}
 
       <footer className="footer">
         &copy; {new Date().getFullYear()} {PROFILE.name}. All rights reserved.
